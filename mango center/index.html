@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango Center - Тавтай морилно уу</title>
+    <!-- AOS Анимейшн сангийн CSS холбоос (Үнэгүй) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #222;
+            overflow-x: hidden;
+        }
+        nav {
+            background-color: #1a1a1a;
+            padding: 18px 10px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        nav a:hover, nav a.active {
+            color: #FFD200;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+        }
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            color: #FFD200;
+            animation: fadeInDown 0.8s ease;
+        }
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            line-height: 1.5;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease;
+        }
+        .hero-btn {
+            background: #FFD200;
+            color: #111;
+            padding: 15px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 210, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse 2s infinite;
+        }
+        .hero-btn:hover {
+            background: #ffa700;
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -40px auto 40px auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 10;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #222;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .service-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+        }
+        .service-info {
+            padding: 20px;
+        }
+        .service-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            color: #111;
+        }
+        .service-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* АНИМЕЙШН ТҮЛХҮҮРҮҮД */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 210, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 210, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 210, 0, 0); }
+        }
+
+        [data-netlify-badge], .netlify-badge, #netlify-badge {
+            display: none !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #1a1a1a;
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="active">Нүүр хуудас</a>
+        <a href="menu.html">Үйлчилгээ & Цэс</a>
+        <a href="about.html">Бидний тухай</a>
+    </nav>
+
+    <div class="hero">
+        <h1>MANGO CENTER</h1>
+        <p>Кофе шоп, ресторан, караоке болон зочид буудлыг нэг дор багтаасан тансаг зэрэглэлийн цогцолбор</p>
+        <a href="menu.html" class="hero-btn">Цэс үзэх & Захиалах</a>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Манай үйлчилгээнүүд</h2>
+        
+        <div class="services-grid">
+            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <img class="service-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500" alt="Coffee">
+                <div class="service-info">
+                    <h3>☕ Кофе Шоп</h3>
+                    <p>Амттай шинэхэн кофе, смути болон төрөл бүрийн халуун хүйтэн ууц.</p>
+                </div>
+            </a>
+
+            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <img class="service-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500" alt="Restaurant">
+                <div class="service-info">
+                    <h3>🍔 Ресторан</h3>
+                    <p>Тансаг зэрэглэлийн стейк, бургер, пицца болон амтат хоолнууд.</p>
+                </div>
+            </a>
+
+            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <img class="service-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500" alt="Karaoke">
+                <div class="service-info">
+                    <h3>🎤 Караоке Өрөөнүүд</h3>
+                    <p>Тухтай, орчин үеийн дуугаралт сайтай энгийн болон VIP өрөөнүүд.</p>
+                </div>
+            </a>
+
+            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <img class="service-img" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500" alt="Hotel">
+                <div class="service-info">
+                    <h3>🏨 Зочид Буудал</h3>
+                    <p>Тухтай орчин, цэвэр цэмцгэр 1-4 хүний болон люкс VIP өрөөнүүд.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Mango Center. Бүх эрх хуулиар хамгаалагдсан.</p>
+    </footer>
+
+    <!-- AOS Анимейшн скрипт -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
