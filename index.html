@@ -3,234 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mango Center - Тавтай морилно уу</title>
-    <!-- AOS Анимейшн сангийн CSS холбоос (Үнэгүй) -->
+    <title>Mango Center - Нүүр хуудас</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         body {
             background: #f4f6f9;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #222;
-            overflow-x: hidden;
         }
+
+        /* ТОМ ТОБЧИН ЦЭС */
         nav {
-            background-color: #1a1a1a;
-            padding: 18px 10px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+            background-color: #111111;
+            padding: 12px 10px;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        nav a {
-            color: #fff;
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 4px;
+        }
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: #222222;
+            color: #ffffff;
             text-decoration: none;
-            margin: 0 12px;
-            font-size: 18px;
-            font-weight: 700;
-            transition: color 0.3s ease;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #333;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            flex: 1;
+            text-align: center;
         }
-        nav a:hover, nav a.active {
+        .nav-btn.active {
+            background: #FFD200;
+            color: #111111;
+            border-color: #FFD200;
+            box-shadow: 0 4px 12px rgba(255, 210, 0, 0.35);
+        }
+        .nav-btn:active { transform: scale(0.96); }
+
+        /* УРАМШУУЛЛЫН ТОРП БАННЕР */
+        .top-promo-bar {
+            background: linear-gradient(90deg, #ff4e50, #f9d423);
+            color: #111;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .promo-tag {
+            background: #111;
             color: #FFD200;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
+        /* HERO ХЭСЭГ */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') no-repeat center center/cover;
             color: white;
             text-align: center;
-            padding: 90px 20px;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+            padding: 80px 20px;
         }
-        .hero h1 {
-            font-size: 38px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            color: #FFD200;
-            animation: fadeInDown 0.8s ease;
-        }
-        .hero p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.5;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease;
-        }
-        .hero-btn {
+        .hero h1 { font-size: 38px; color: #FFD200; margin-bottom: 10px; font-weight: 800; }
+        .hero p { font-size: 18px; max-width: 500px; margin: 0 auto 25px auto; opacity: 0.9; }
+
+        .main-btn {
+            display: inline-block;
             background: #FFD200;
             color: #111;
-            padding: 15px 32px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
+            padding: 14px 28px;
             border-radius: 30px;
-            cursor: pointer;
             text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(255, 210, 0, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: pulse 2s infinite;
-        }
-        .hero-btn:hover {
-            background: #ffa700;
-            transform: scale(1.05);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: -40px auto 40px auto;
-            padding: 0 15px;
-            position: relative;
-            z-index: 10;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 26px;
             font-weight: bold;
-            margin-bottom: 25px;
-            color: #222;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255, 210, 0, 0.4);
+            transition: 0.3s;
         }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        .main-btn:hover { transform: translateY(-3px); }
+
+        .container { max-width: 900px; margin: 40px auto; padding: 0 15px; }
+
+        /* ИХ УРАМШУУЛЛЫН КАРТ БАННЕР */
+        .promo-banner-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            padding: 30px 25px;
+            color: white;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 2px solid #FFD200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 20px;
-        }
-        .service-card {
-            background: white;
-            border-radius: 16px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
         }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        .promo-banner-card::after {
+            content: "🔥";
+            position: absolute;
+            right: -20px;
+            bottom: -30px;
+            font-size: 140px;
+            opacity: 0.08;
+            pointer-events: none;
         }
-        .service-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .service-card:hover .service-img {
-            transform: scale(1.05);
-        }
-        .service-info {
-            padding: 20px;
-        }
-        .service-info h3 {
-            margin: 0 0 8px 0;
-            font-size: 20px;
+        .promo-content { max-width: 500px; }
+        .promo-badge {
+            display: inline-block;
+            background: #FFD200;
             color: #111;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
-        .service-info p {
-            margin: 0;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.4;
-        }
+        .promo-title { font-size: 24px; font-weight: bold; margin: 0 0 8px 0; color: #fff; }
+        .promo-desc { font-size: 15px; color: #ccc; margin: 0 0 15px 0; line-height: 1.5; }
 
-        /* АНИМЕЙШН ТҮЛХҮҮРҮҮД */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 210, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 210, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 210, 0, 0); }
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .service-card { background: white; border-radius: 16px; padding: 25px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
+        .service-icon { font-size: 40px; margin-bottom: 15px; }
 
-        [data-netlify-badge], .netlify-badge, #netlify-badge {
-            display: none !important;
-        }
+        [data-netlify-badge], .netlify-badge, #netlify-badge { display: none !important; }
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #1a1a1a;
-            color: #aaa;
-            font-size: 14px;
-            margin-top: 40px;
-        }
+        footer { text-align: center; padding: 25px; background: #1a1a1a; color: #aaa; font-size: 14px; margin-top: 40px; }
     </style>
 </head>
 <body>
 
+    <!-- ДЭЭД ХЭСГИЙН АНХААРАЛ ТАТАХ ГҮЙДЭГ / БОГИНО БАННЕР -->
+    <div class="top-promo-bar">
+        <span class="promo-tag">Онцгой урамшуулал</span>
+        <span>🎉 Төрсөн өдрийн эздэд 10% хөнгөлөлттэй!</span>
+    </div>
+
+    <!-- ТАНСАГ ТОМ ТОБЧИН ЦЭС -->
     <nav>
-        <a href="index.html" class="active">Нүүр хуудас</a>
-        <a href="menu.html">Үйлчилгээ & Цэс</a>
-        <a href="about.html">Бидний тухай</a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn active">🏠 Нүүр</a>
+            <a href="menu.html" class="nav-btn">📜 Цэс</a>
+            <a href="about.html" class="nav-btn">ℹ️ Бидний тухай</a>
+        </div>
     </nav>
 
+    <!-- HERO HEADER -->
     <div class="hero">
         <h1>MANGO CENTER</h1>
-        <p>Кофе шоп, ресторан, караоке болон зочид буудлыг нэг дор багтаасан тансаг зэрэглэлийн цогцолбор</p>
-        <a href="menu.html" class="hero-btn">Цэс үзэх & Захиалах</a>
+        <p>Тав тухтай орчин, амтат кофе, онцгой үйлчилгээг нэг дороос</p>
+        <a href="menu.html" class="main-btn">Үйлчилгээ ба Цэс харах 👉</a>
     </div>
 
     <div class="container">
-        <h2 class="section-title">Манай үйлчилгээнүүд</h2>
         
-        <div class="services-grid">
-            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
-                <img class="service-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500" alt="Coffee">
-                <div class="service-info">
-                    <h3>☕ Кофе Шоп</h3>
-                    <p>Амттай шинэхэн кофе, смути болон төрөл бүрийн халуун хүйтэн ууц.</p>
-                </div>
-            </a>
-
-            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
-                <img class="service-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500" alt="Restaurant">
-                <div class="service-info">
-                    <h3>🍔 Ресторан</h3>
-                    <p>Тансаг зэрэглэлийн стейк, бургер, пицца болон амтат хоолнууд.</p>
-                </div>
-            </a>
-
-            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
-                <img class="service-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500" alt="Karaoke">
-                <div class="service-info">
-                    <h3>🎤 Караоке Өрөөнүүд</h3>
-                    <p>Тухтай, орчин үеийн дуугаралт сайтай энгийн болон VIP өрөөнүүд.</p>
-                </div>
-            </a>
-
-            <a href="menu.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
-                <img class="service-img" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500" alt="Hotel">
-                <div class="service-info">
-                    <h3>🏨 Зочид Буудал</h3>
-                    <p>Тухтай орчин, цэвэр цэмцгэр 1-4 хүний болон люкс VIP өрөөнүүд.</p>
-                </div>
-            </a>
+        <!-- ТОМ УРАМШУУЛЛЫН БАННЕР -->
+        <div class="promo-banner-card" data-aos="zoom-in">
+            <div class="promo-content">
+                <span class="promo-badge">🎁 САРЫН УРАМШУУЛАЛ</span>
+                <h2 class="promo-title">VIP Караоке & Буудлын Багц</h2>
+                <p class="promo-desc">Караоке өрөө 2 цагаас дээш авбал гарын гарын амтат капучино эсвэл манго смузи бэлгэнд авна уу!</p>
+                <a href="menu.html" class="main-btn" style="padding: 10px 22px; font-size: 14px;">Захиалга өгөх</a>
+            </div>
         </div>
+
+        <!-- ҮЙЛЧИЛГЭЭНҮҮД -->
+        <h2 style="text-align: center; margin-bottom: 30px;" data-aos="fade-up">Манай цогц үйлчилгээ</h2>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-icon">☕</div>
+                <h3>Кофе шоп</h3>
+                <p>Шинэхэн хуурсан арабика шош ба амтат смузи</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-icon">🍔</div>
+                <h3>Ресторан</h3>
+                <p>Амтат бургер, пицца болон тусгай хоолнууд</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-icon">🎤</div>
+                <h3>Караоке</h3>
+                <p>Өндөр зэрэглэлийн дуугаралт бүхий тухтай өрөөнүүд</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-icon">🏨</div>
+                <h3>Зочид буудал</h3>
+                <p>Тав тухтай, аюулгүй, цэвэрхэн орчин</p>
+            </div>
+        </div>
+
     </div>
 
     <footer>
         <p>© 2026 Mango Center. Бүх эрх хуулиар хамгаалагдсан.</p>
     </footer>
 
-    <!-- AOS Анимейшн скрипт -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-    </script>
+    <script>AOS.init({ duration: 600, once: true });</script>
 </body>
 </html>

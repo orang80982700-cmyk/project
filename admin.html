@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango Center - Админ Самбар</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #222;
+        }
+        .login-box, .admin-container {
+            max-width: 750px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .login-box h2 { text-align: center; margin-top: 0; color: #111; }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0 15px 0;
+            font-size: 15px;
+        }
+        .btn {
+            background: #111;
+            color: #FFD200;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn:hover { background: #333; }
+        .admin-container { display: none; }
+        
+        .order-card {
+            background: #fffdf9;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            border-left: 6px solid #f39c12;
+        }
+        .order-card.status-doing { border-left-color: #3498db; background: #f0f8ff; }
+        .order-card.status-done { border-left-color: #2ecc71; background: #f4fcf7; opacity: 0.9; }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .order-id { font-weight: bold; color: #e67e22; font-size: 15px; }
+        .order-time { color: #666; font-size: 13px; }
+        
+        .items-list-box {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0;
+        }
+        .order-item-row {
+            padding: 6px 0;
+            border-bottom: 1px dashed #f3f4f6;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .order-item-row:last-child { border-bottom: none; }
+        .item-name { font-weight: bold; color: #111; }
+        .item-sub { font-size: 12px; color: #e67e22; margin-top: 2px; }
+
+        .order-note { font-size: 13px; color: #555; background: #f9fafb; padding: 8px 12px; border-radius: 6px; margin-top: 10px; border: 1px solid #eee; }
+        
+        .status-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed #ddd;
+        }
+        .status-btn {
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-pending { background: #f39c12; color: white; }
+        .btn-doing { background: #3498db; color: white; }
+        .btn-done { background: #2ecc71; color: white; }
+        .status-btn:hover { opacity: 0.8; }
+
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .clear-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .clear-btn:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+
+    <!-- НЭВТРЭХ ХЭСЭГ -->
+    <div class="login-box" id="loginCard">
+        <h2>🔒 Админ Нэвтрэх</h2>
+        <p style="text-align: center; font-size: 13px; color: #666;">Mango Center удирдлагын хэсэг</p>
+        <label style="font-size: 14px; font-weight: bold;">Нууц үг:</label>
+        <input type="password" id="adminPass" class="input-field" placeholder="Нууц үгээ бичнэ үү (mango123)">
+        <button class="btn" onclick="checkLogin()">Нэвтрэх</button>
+        <p id="errorMsg" style="color: red; text-align: center; font-size: 13px; margin-top: 10px; display: none;">Нууц үг буруу байна!</p>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="menu.html" style="color: #666; text-decoration: none; font-size: 13px;">← Цэс хуудас руу буцах</a>
+        </div>
+    </div>
+
+    <!-- АДМИН УДИРДЛАГЫН ХЭСЭГ -->
+    <div class="admin-container" id="adminDashboard">
+        <div class="action-bar">
+            <div>
+                <h2 style="margin: 0;">📋 Ирсэн Захиалгууд</h2>
+                <p style="margin: 4px 0 0 0; font-size: 12px; color: #666;">Захиалга болон төлөв удирдах хэсэг</p>
+            </div>
+            <button class="clear-btn" onclick="clearOrders()">Бүх түүхийг цэвэрлэх</button>
+        </div>
+        
+        <div id="ordersList"></div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="menu.html" style="color: #111; font-weight: bold; text-decoration: none; background: #FFD200; padding: 10px 20px; border-radius: 8px; display: inline-block;">📜 Цэс хуудас руу очих</a>
+        </div>
+    </div>
+
+    <script>
+        const CORRECT_PASSWORD = "mango123";
+
+        function checkLogin() {
+            let pass = document.getElementById('adminPass').value;
+            if (pass === CORRECT_PASSWORD) {
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                loadOrders();
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        function loadOrders() {
+            let ordersList = document.getElementById('ordersList');
+            let orders = JSON.parse(localStorage.getItem('mango_orders') || '[]');
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<p style="text-align: center; color: #888; padding: 30px 0;">Одоогоор шинэ захиалга ирээгүй байна.</p>';
+                return;
+            }
+
+            ordersList.innerHTML = '';
+            orders.forEach((ord, index) => {
+                let statusClass = '';
+                if(ord.status === 'doing') statusClass = 'status-doing';
+                if(ord.status === 'done') statusClass = 'status-done';
+
+                let statusText = '⏳ Хүлээгдэж байна';
+                if(ord.status === 'doing') statusText = '🔥 Хийгдэж байна';
+                if(ord.status === 'done') statusText = '✅ Дууссан';
+
+                let itemsHtml = '';
+                if (Array.isArray(ord.itemsArray)) {
+                    ord.itemsArray.forEach(i => {
+                        let subInfo = i.booking ? `<div class="item-sub">${i.booking}</div>` : '';
+                        itemsHtml += `
+                            <div class="order-item-row">
+                                <div>
+                                    <span class="item-name">• ${i.title}</span>
+                                    ${subInfo}
+                                </div>
+                                <span style="font-weight:bold; color:#e67e22;">${i.price}</span>
+                            </div>
+                        `;
+                    });
+                } else {
+                    itemsHtml = `<div style="padding: 6px 0; font-size:14px;">${ord.items}</div>`;
+                }
+
+                ordersList.innerHTML += `
+                    <div class="order-card ${statusClass}">
+                        <div class="order-header">
+                            <span class="order-id">🆔 ${ord.id} (📞 Утас: <b>${ord.phone}</b>)</span>
+                            <span class="order-time">🕒 <b>${ord.time}</b></span>
+                        </div>
+                        
+                        <div style="font-size:13px; font-weight:bold; color:#444; margin-bottom:4px;">📦 Захиалсан зүйлс:</div>
+                        <div class="items-list-box">
+                            ${itemsHtml}
+                        </div>
+
+                        <div style="font-size: 15px; color: #111; font-weight: bold; margin-top: 8px; display:flex; justify-content:space-between;">
+                            <span>Нийт дүн:</span>
+                            <span style="color: #e67e22;">${ord.total}</span>
+                        </div>
+                        <div class="order-note">💬 Тэмдэглэл: ${ord.note}</div>
+                        
+                        <div style="margin-top: 10px; font-size: 13px; font-weight: bold;">Төлөв: ${statusText}</div>
+
+                        <div class="status-actions">
+                            <button class="status-btn btn-pending" onclick="updateStatus(${index}, 'pending')">Хүлээгдэж буй</button>
+                            <button class="status-btn btn-doing" onclick="updateStatus(${index}, 'doing')">Хийж байна</button>
+                            <button class="status-btn btn-done" onclick="updateStatus(${index}, 'done')">Дууссан</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateStatus(index, newStatus) {
+            let orders = JSON.parse(localStorage.getItem('mango_orders') || '[]');
+            if(orders[index]) {
+                orders[index].status = newStatus;
+                localStorage.setItem('mango_orders', JSON.stringify(orders));
+                loadOrders();
+            }
+        }
+
+        function clearOrders() {
+            if(confirm("Бүх захиалгын түүхийг устгахдаа итгэлтэй байна уу?")) {
+                localStorage.removeItem('mango_orders');
+                loadOrders();
+            }
+        }
+    </script>
+</body>
+</html>
